@@ -1,18 +1,21 @@
 import datetime as dt
 from itertools import product
 
-#branch weightages
+#branch weightage
 BRANCH_WEIGHTS = {"ADS": 0.30, "IT": 0.20, "ECE": 0.18,
                   "MECH": 0.12, "CIVIL": 0.10, "EE": 0.10}
 BRANCHES = list(BRANCH_WEIGHTS)
 YEARS = [1, 2, 3, 4]
 
-#exam dates for sem
+# exam dates
 EXAM_DATES = [dt.date(2026, 11, d) for d in (14, 16, 20, 22, 30)]
 
-# yrs 1 and 2 morning, yrs3 and 4 afternoon
+#timing slots
 SLOT_BY_YEAR = {1: "Morning", 2: "Morning", 3: "Afternoon", 4: "Afternoon"}
 REPORTING_TIME = {"Morning": "10:30", "Afternoon": "14:00"}
+
+# added semester by yr
+SEMESTER_BY_YEAR = {1: 1, 2: 3, 3: 5, 4: 7}
 
 
 def subject_code(branch, year, n):
