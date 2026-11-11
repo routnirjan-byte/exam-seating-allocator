@@ -9,24 +9,22 @@ from config import BRANCHES, YEARS
 # 1. CLEAN STUDENT DATA
 # --------------------------------
 
-def clean_students(df):
 
+def clean_students(df):
     df = df.copy()
 
     # Remove extra spaces
     df["name"] = df["name"].str.strip()
     df["email"] = df["email"].str.strip().str.lower()
     df["branch"] = df["branch"].str.strip().str.upper()
-
-    # Standardize exam slots
     df["exam_slot"] = df["exam_slot"].str.strip().str.title()
 
-    # Remove duplicate exam records
+    # Remove duplicate student exam records
     df = df.drop_duplicates(
         subset=["roll_no", "subject_code", "exam_date", "exam_slot"]
     )
 
-    # Convert numeric columns
+    # Convert attendance and absence count into numbers
     df["attendance_pct"] = pd.to_numeric(
         df["attendance_pct"], errors="coerce"
     )
@@ -35,8 +33,14 @@ def clean_students(df):
         df["prev_absent_count"], errors="coerce"
     )
 
-    return df
+    # Replace missing attendance with median attendance
+    median_attendance = df["attendance_pct"].median()
 
+    df["attendance_pct"] = df["attendance_pct"].fillna(
+        median_attendance
+    )
+
+    return df
 
 # --------------------------------
 # 2. VALIDATE STUDENT DATA
@@ -55,6 +59,15 @@ def validate_students(df):
 
     if missing_columns:
         raise ValueError(f"Missing columns: {missing_columns}")
+
+
+    valid_emails = df["email"].str.match(
+    r"^[\w.-]+@[\w.-]+\.\w+$",
+    na=False
+)
+
+    if not valid_emails.all():
+        raise ValueError("Invalid email addresses found")
 
     # Check missing values
     if df[required_columns].isnull().any().any():

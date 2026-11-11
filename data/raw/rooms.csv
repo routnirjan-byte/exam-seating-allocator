@@ -1,0 +1,11 @@
+room_id,building,floor,rows,benches_per_row,seats_per_bench,capacity,available
+R001,C,0,4,5,2,40,True
+R002,B,1,4,3,2,24,True
+R003,C,0,6,5,2,60,True
+R004,C,0,6,4,2,48,True
+R005,A,0,4,3,2,24,True
+R006,A,0,6,3,2,36,True
+R007,C,3,4,4,2,32,True
+R008,C,2,4,3,2,24,True
+R009,C,3,5,4,2,40,True
+R010,A,1,5,3,2,30,True
