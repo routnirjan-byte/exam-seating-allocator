@@ -1,11 +1,11 @@
 # Allocation algorithm design
 
-## 1. Goal
+## 1.Goal
 Seat every student in an available room so that no two adjacent seats hold
 the same subject, while keeping room usage balanced. A pair of adjacent seats
 with the same subject is called a violation. The target is zero violations.
 
-## 2. Inputs and output
+## 2.Inputs and output
 - Input: students.csv (one row per student per exam) and rooms.csv
 - Output: an allocation table with room_id, building, floor, row, bench and
   seat for every student-exam (see docs/data_schema.md)
