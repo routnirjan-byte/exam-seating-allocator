@@ -1,5 +1,6 @@
 import pandas as pd
 
+
 def normalize_rooms(df):
     """Accept benches_per_row x seats_per_bench, or rows x columns (one seat
     per bench). Recomputes capacity and fills building, floor, available."""
