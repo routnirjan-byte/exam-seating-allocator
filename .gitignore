@@ -222,3 +222,4 @@ __marimo__/
 logs/
 data/synthetic/
 venv/
+models/
