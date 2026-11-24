@@ -1,0 +1,8 @@
+Dear {name},
+
+{note}Your seating for the November 2026 examinations (roll number {roll_no}):
+
+{details}
+
+Please carry your college ID card and report at the time shown.
+This is an automated message. Please do not reply.
