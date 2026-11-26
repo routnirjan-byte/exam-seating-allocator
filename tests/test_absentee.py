@@ -39,6 +39,7 @@ def test_predictions_are_probabilities():
 
 def test_slot_plan_adds_up():
     scored = predict_absence(model, students)
+    scored["absent"] = simulate_absence(students)
     plan = slot_plan(scored)
-    assert abs(plan["expected_absent"].sum() - scored["p_absent"].sum()) < 1
-    assert (plan["likely_max_absent"] >= plan["expected_absent"]).all()
+    assert abs(plan["predicted_absent"].sum() - scored["p_absent"].sum()) < 1
+    assert (plan["likely_max_absent"] >= plan["predicted_absent"]).all()
