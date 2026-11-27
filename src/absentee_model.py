@@ -144,11 +144,14 @@ def slot_plan(scored):
 
     grouped = scored.groupby(keys)
 
-    plan = grouped.agg(
-        students=("p_absent", "size"),
-        predicted_absent=("p_absent", "sum"),
-        actual_absent=("absent", "sum")
-    )
+    agg_spec = {
+        "students": ("p_absent", "size"),
+        "expected_absent": ("p_absent", "sum"),
+    }
+    if "absent" in scored.columns:
+        agg_spec["actual_absent"] = ("absent", "sum")
+
+    plan = grouped.agg(**agg_spec)
 
     variance = (
         scored["p_absent"] * (1 - scored["p_absent"])
